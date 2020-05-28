@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite.xml" />
+	<munit:test name="example-test" doc:id="3260860b-7257-4792-84fd-278ceca9bd87" >
+		<munit:execution >
+			<set-payload value="#[false]" doc:name="false" doc:id="bb9f4ea6-9e12-433c-82ec-b4529a4f3599" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="true" doc:id="6894673f-fab1-4bf4-beed-c6ea472bca23" actual="#[payload]" expected="#[true]" message="Default test failed. Be sure to add unit tests."/>
+		</munit:validation>
+	</munit:test>
+
+</mule>

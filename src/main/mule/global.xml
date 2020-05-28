@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<global-property doc:name="Global Property" doc:id="9462eb85-a61d-40f1-8cd6-4e5d279291b2" name="mule.env" value="local" />
+	<global-property doc:name="Global Property" doc:id="8ac7d4e1-5a9b-4356-9d03-b3c34a9f466d" name="encryption.key" value="localkey" />
+	
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="8d1a1b0c-1394-4c2d-a594-d2ab4d0bcaac" file="${mule.env}.properties" key="${secure-properties.key}" />
+	
+	<http:listener-config name="api-httpListenerConfig">
+        <http:listener-connection host="${secure::http-listener.host}" port="${secure::http-listener.port}" />
+    </http:listener-config>
+    
+    <api-gateway:autodiscovery apiId="${secure::api.autodiscovery-id}" doc:name="API Autodiscovery" doc:id="19b5363c-f5e8-455c-b00a-03661f23346a" flowRef="api-main" />
+	
+	<!-- Use these to import mule configuration files from a commons project. See: https://help.mulesoft.com/s/article/How-to-add-a-call-to-an-external-flow-in-Mule-4 -->
+	<!-- <import doc:name="Import" doc:id="7a2c49ce-3deb-4f61-916e-4c86cedf6892" file="shared-flows.xml" /> -->
+</mule>
